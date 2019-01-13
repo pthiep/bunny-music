@@ -12,23 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using bunny_music.Common;
-using bunny_music.ViewModels;
-using MahApps.Metro.Controls;
 
-namespace bunny_music
+namespace bunny_music.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MedialibView.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class MedialibView : UserControl
     {
-        public MainWindow()
+        public MedialibView()
         {
-            var vm = new MainWindowViewModel(this.Dispatcher);
-            this.DataContext = vm;
             InitializeComponent();
-            //this.Closed += (sender, e) => PlayerEngine.Instance.CleanUp();
         }
     }
 }

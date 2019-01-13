@@ -1,12 +1,61 @@
-﻿<Window x:Class="bunny_music.MainWindow"
+﻿<Controls:MetroWindow x:Class="bunny_music.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:bunny_music"
+        xmlns:Views="clr-namespace:bunny_music.Views"
+        xmlns:ViewModels="clr-namespace:bunny_music.ViewModels"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:Common="clr-namespace:bunny_music.Common"
+        xmlns:ValueConverters="clr-namespace:bunny_music.ValueConverters"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        d:DataContext="{d:DesignInstance ViewModels:MainWindowViewModel}"
+        Title="MainWindow" 
+        Height="600"
+        Width="400"
+        WindowStartupLocation="CenterScreen"
+        ShowMaxRestoreButton="False">
+    
+    <Grid Background="#FFF98888">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Views:PlayControlView Grid.Row="0"
+                           HorizontalAlignment="Center" 
+                           DataContext="{Binding PlayControlViewModel, Mode=OneWay}" />
+
+        <Controls:MetroContentControl Grid.Row="1">
+            <TabControl>
+                <TabItem Header="_Playlists">
+                    <Views:PlaylistsView DataContext="{Binding PlaylistsViewModel, Mode=OneWay}"
+                               Margin="5"/>
+                </TabItem>
+                <TabItem Header="_Medialib">
+                    <Views:MedialibView />
+                </TabItem>
+            </TabControl>
+        </Controls:MetroContentControl>
+
+        <StackPanel Grid.Row="2"
+                Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center"
+                 Text="Loading Files..." />
+            <ProgressBar
+                 Style="{DynamicResource MaterialDesignCircularProgressBar}"
+                 Value="0"
+                 IsIndeterminate="True" />
+            <Grid>
+                <Button VerticalAlignment="Center"
+                Margin="5,0,0,0"
+                Content="Cancel">
+                </Button>
+            </Grid>
+        </StackPanel>
+
     </Grid>
-</Window>
+    
+</Controls:MetroWindow>
